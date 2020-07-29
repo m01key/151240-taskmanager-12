@@ -1,5 +1,7 @@
 'use strict'
 
+const COUNT_TASKS = 3;
+
 const createMenuMarkup = () => {
   return(
     `<section class="control__btn-wrap">
@@ -354,6 +356,47 @@ const createTaskMarkup = () => {
 const createLoadMoreMarkup = () => {
   return(`<button class="load-more" type="button">load more</button>`);
 }
+
+
+const createBoardMarkup = () => {
+  return(
+    `<section class="board container">
+      <div class="board__tasks"></div>
+    </section>`
+  );
+}
+
+// элементы дом
+const mainElement = document.querySelector('.main');
+const menuElement = mainElement.querySelector('.main__control');
+
+const render = (container, markup, place) => {
+  container.insertAdjacentHTML(place, markup);
+}
+
+// рендер
+render(menuElement, createMenuMarkup(), 'beforeend');
+render(menuElement, createFilterMarkup(), 'afterend');
+render(mainElement, createBoardMarkup(), 'beforeend');
+
+// дом
+const boardTaskElement = mainElement.querySelector('.board__tasks');
+
+// рендер
+render(boardTaskElement, createSortMarkup(), 'beforebegin');
+
+for (let i = 0; i < COUNT_TASKS; i++) {
+  render(boardTaskElement, createTaskMarkup(), 'afterbegin');
+}
+
+render(boardTaskElement, createLoadMoreMarkup(), 'afterend');
+render(boardTaskElement, createEditTaskMarkup(), 'afterbegin');
+
+
+
+
+
+
 
 
 
