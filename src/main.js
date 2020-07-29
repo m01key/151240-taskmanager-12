@@ -1,6 +1,9 @@
 'use strict'
 
-const COUNT_TASKS = 3;
+const TASKS_COUNT = 3;
+
+
+// создаем разметку
 
 const createMenuMarkup = () => {
   return(
@@ -34,7 +37,6 @@ const createMenuMarkup = () => {
     </section>`
   );
 }
-
 
 const createFilterMarkup = () => {
   return(
@@ -100,6 +102,14 @@ const createFilterMarkup = () => {
   );
 }
 
+const createBoardMarkup = () => {
+  return(
+    `<section class="board container">
+      <div class="board__tasks"></div>
+    </section>`
+  );
+}
+
 const createSortMarkup = () => {
   return(
     `<div class="board__filter-list">
@@ -107,10 +117,50 @@ const createSortMarkup = () => {
       <a href="#" class="board__filter" data-sort-type="date-up">SORT BY DATE up</a>
       <a href="#" class="board__filter" data-sort-type="date-down">SORT BY DATE down</a>
     </div>`
-    );
+  );
 }
 
-const createEditTaskMarkup = () => {
+const createTaskMarkup = () => {
+  return(
+    `<article class="card card--yellow">
+          <div class="card__form">
+            <div class="card__inner">
+              <div class="card__control">
+                <button type="button" class="card__btn card__btn--edit">
+                  edit
+                </button>
+                <button type="button" class="card__btn card__btn--archive">
+                  archive
+                </button>
+                <button
+                  type="button"
+                  class="card__btn card__btn--favorites card__btn--disabled"
+                >
+                  favorites
+                </button>
+              </div>
+    
+              <div class="card__color-bar">
+                <svg class="card__color-bar-wave" width="100%" height="10">
+                  <use xlink:href="#wave"></use>
+                </svg>
+              </div>
+    
+              <div class="card__textarea-wrap">
+                <p class="card__text">Example task with custom color and without date.</p>
+              </div>
+    
+              <div class="card__settings">
+                <div class="card__details">
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>`
+  );
+}
+
+const createTaskEditMarkup = () => {
   return(
     `<article class="card card--edit card--yellow card--repeat">
       <form class="card__form" method="get">
@@ -312,91 +362,32 @@ const createEditTaskMarkup = () => {
   );
 }
 
-const createTaskMarkup = () => {
-  return(
-    `<article class="card card--yellow">
-          <div class="card__form">
-            <div class="card__inner">
-              <div class="card__control">
-                <button type="button" class="card__btn card__btn--edit">
-                  edit
-                </button>
-                <button type="button" class="card__btn card__btn--archive">
-                  archive
-                </button>
-                <button
-                  type="button"
-                  class="card__btn card__btn--favorites card__btn--disabled"
-                >
-                  favorites
-                </button>
-              </div>
-    
-              <div class="card__color-bar">
-                <svg class="card__color-bar-wave" width="100%" height="10">
-                  <use xlink:href="#wave"></use>
-                </svg>
-              </div>
-    
-              <div class="card__textarea-wrap">
-                <p class="card__text">Example task with custom color and without date.</p>
-              </div>
-    
-              <div class="card__settings">
-                <div class="card__details">
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>`
-  );
-}
-
-
-const createLoadMoreMarkup = () => {
+const createLoadButtonMarkup = () => {
   return(`<button class="load-more" type="button">load more</button>`);
 }
 
 
-const createBoardMarkup = () => {
-  return(
-    `<section class="board container">
-      <div class="board__tasks"></div>
-    </section>`
-  );
-}
-
-// элементы дом
-const mainElement = document.querySelector('.main');
-const menuElement = mainElement.querySelector('.main__control');
+// шаблон рендеринга верстки
 
 const render = (container, markup, place) => {
   container.insertAdjacentHTML(place, markup);
 }
 
-// рендер
+
+const mainElement = document.querySelector('.main');
+const menuElement = mainElement.querySelector('.main__control');
+
 render(menuElement, createMenuMarkup(), 'beforeend');
 render(menuElement, createFilterMarkup(), 'afterend');
 render(mainElement, createBoardMarkup(), 'beforeend');
 
-// дом
 const boardTaskElement = mainElement.querySelector('.board__tasks');
 
-// рендер
 render(boardTaskElement, createSortMarkup(), 'beforebegin');
 
-for (let i = 0; i < COUNT_TASKS; i++) {
+for (let i = 0; i < TASKS_COUNT; i++) {
   render(boardTaskElement, createTaskMarkup(), 'afterbegin');
 }
 
-render(boardTaskElement, createLoadMoreMarkup(), 'afterend');
-render(boardTaskElement, createEditTaskMarkup(), 'afterbegin');
-
-
-
-
-
-
-
-
-
+render(boardTaskElement, createLoadButtonMarkup(), 'afterend');
+render(boardTaskElement, createTaskEditMarkup(), 'afterbegin');
