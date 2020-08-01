@@ -1,5 +1,5 @@
 const createMenuMarkup = () => {
-  return(
+  return (
     `<section class="control__btn-wrap">
       <input
         type="radio"
@@ -29,6 +29,7 @@ const createMenuMarkup = () => {
       >
     </section>`
   );
-}
+};
 
-export { createMenuMarkup }
+
+export {createMenuMarkup};

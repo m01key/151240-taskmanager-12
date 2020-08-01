@@ -1,5 +1,5 @@
 const createFilterMarkup = () => {
-  return(
+  return (
     `<section class="main__filter filter container">
         <input
           type="radio"
@@ -60,6 +60,7 @@ const createFilterMarkup = () => {
         >
       </section>`
   );
-}
+};
 
-export { createFilterMarkup }
+
+export {createFilterMarkup};

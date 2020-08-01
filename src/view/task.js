@@ -1,5 +1,5 @@
 const createTaskMarkup = () => {
-  return(
+  return (
     `<article class="card card--yellow">
           <div class="card__form">
             <div class="card__inner">
@@ -36,6 +36,7 @@ const createTaskMarkup = () => {
           </div>
         </article>`
   );
-}
+};
 
-export { createTaskMarkup }
+
+export {createTaskMarkup};
