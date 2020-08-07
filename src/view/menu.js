@@ -1,4 +1,4 @@
-const createMenuMarkup = () => {
+const createMenuTemplate = () => {
   return (
     `<section class="control__btn-wrap">
       <input
@@ -32,4 +32,4 @@ const createMenuMarkup = () => {
 };
 
 
-export {createMenuMarkup};
+export {createMenuTemplate};
