@@ -6,12 +6,13 @@ import SiteMenuView from './view/site-menu.js';
 import FilterView from './view/filter.js';
 import TaskView from "./view/task.js";
 import TaskEditView from "./view/task-edit.js";
+import NoTaskView from "./view/no-task.js";
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter.js";
 import {render, RenderPosition} from "./utils.js";
 
 
-const TASKS_COUNT = 20;
+const TASKS_COUNT = 0;
 const TASK_COUNT_PER_STEP = 8;
 
 const tasks = new Array(TASKS_COUNT).fill().map(generateTask);
@@ -60,6 +61,10 @@ const renderBoard = (boardContainer, boardTasks) => {
   render(boardContainer, boardComponent.getElement(), RenderPosition.BEFOREEND);
   render(boardComponent.getElement(), taskListComponent.getElement(), RenderPosition.BEFOREEND);
 
+  if (boardTasks.every((task) => task.isArchive)) {
+    render(boardComponent.getElement(), new NoTaskView().getElement(), RenderPosition.AFTERBEGIN);
+    return;
+  }
 
   render(boardComponent.getElement(), new SortView().getElement(), RenderPosition.AFTERBEGIN);
   boardTasks
