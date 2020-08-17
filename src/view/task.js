@@ -58,7 +58,7 @@ const createTaskTemplate = (task) => {
 
 export default class Task extends AbstractView {
   constructor(task) {
-    super()
+    super();
     this._task = task;
     this._editClickHandler = this._editClickHandler.bind(this);
   }
