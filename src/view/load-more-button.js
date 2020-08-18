@@ -6,7 +6,7 @@ const createLoadMoreButtonTemplate = () => {
 };
 
 
-export default class LoadMoreButton extends AbstractView {
+export default class LoadMoreButtonView extends AbstractView {
   constructor() {
     super();
     // 4. Теперь обработчик - метод класса, а не стрелочная функция.
