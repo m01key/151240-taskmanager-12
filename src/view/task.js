@@ -44,7 +44,6 @@ const createTaskTemplate = (task) => {
                     <div class="card__date-deadline">
                       <p class="card__input-deadline-wrap">
                         <span class="card__date">${date}</span>
-                        <span class="card__time">16:15</span>
                       </p>
                     </div>
                   </div>
@@ -61,6 +60,18 @@ export default class TaskView extends AbstractView {
     super();
     this._task = task;
     this._editClickHandler = this._editClickHandler.bind(this);
+    this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
+    this._archiveClickHandler = this._archiveClickHandler.bind(this);
+  }
+
+  _favoriteClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.favoriteClick();
+  }
+
+  _archiveClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.archiveClick();
   }
 
   _editClickHandler(evt) {
@@ -72,6 +83,17 @@ export default class TaskView extends AbstractView {
     this._callback.editClick = callback;
     this.getElement().querySelector(`.card__btn--edit`).addEventListener(`click`, this._editClickHandler);
   }
+
+  setFavoriteClickHandler(callback) {
+    this._callback.favoriteClick = callback;
+    this.getElement().querySelector(`.card__btn--favorites`).addEventListener(`click`, this._favoriteClickHandler);
+  }
+
+  setArchiveClickHandler(callback) {
+    this._callback.archiveClick = callback;
+    this.getElement().querySelector(`.card__btn--archive`).addEventListener(`click`, this._archiveClickHandler);
+  }
+
   getTemplate() {
     return createTaskTemplate(this._task);
   }
